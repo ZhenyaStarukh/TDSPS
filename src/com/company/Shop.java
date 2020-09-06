@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class Shop {
     private static final ArrayList<String> Customers = new ArrayList<>();
+    private static ArrayList<Pigment> Pigments = new ArrayList<Pigment>();
+    private static boolean open = true;
+    private static double pillow;
     static void addCustomer(String id){
         if (!id.equals("None")) {
             Customers.add(id);
@@ -20,6 +23,20 @@ public class Shop {
     }
    static boolean inList(String id){
        return Customers.contains(id);
+   }
+
+   static boolean isOpen(){
+        return open;
+   }
+   static void close(){
+        open = false;
+   }
+   static void open(){ open = true;}
+   static void printPigments(){
+       System.out.println("List of pigments");
+       for(int i = 0; i< Pigments.size();i++){
+           System.out.println((i+1)+") "+Pigments.get(i).getName()+" "+Pigments.get(i).getPrice()+" "/*+Pigments.get(i).getFormula()*/);
+       }
    }
 
 }
