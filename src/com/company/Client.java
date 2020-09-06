@@ -1,7 +1,6 @@
 package com.company;
 import java.util.Scanner;
 
-
 public class Client {
     private String id;
     public Client(){
@@ -11,14 +10,12 @@ public class Client {
         return id;
     }
     public void setId(String number){
-        if (number.matches("(\\+380)[3-9]\\d{8}")){
-            id = number;
-        } else {
-            do{
-                System.out.println("Please try again.");
-                Scanner in = new Scanner(System.in);
-                number = in.next();
-            }while(number.matches("(\\+380)[3-9]\\d{8}"));
+        while(!number.matches("(\\+380)[3-9]\\d{8}")){
+            System.out.println("Please try again.");
+            Scanner in = new Scanner(System.in);
+            number = in.next();
         }
+        id = number;
+
     }
 }
