@@ -1,3 +1,5 @@
+package com.company;
+
 public class Pigment {
     double formula;
     int weight;
