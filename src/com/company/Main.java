@@ -8,6 +8,9 @@ public class Main {
     	Scanner in = new Scanner(System.in);
     	System.out.print("Enter phone number (e.g. +380976234532): ");
     	one.setId(in.next());
-    	System.out.println("\n"+one.getId());
+    	RegisterService.Register(one);
+    	Client two = new Client();
+    	RegisterService.Register(two);
+    	RegisterService.Register(one);
     }
 }

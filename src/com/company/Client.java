@@ -16,6 +16,5 @@ public class Client {
             number = in.next();
         }
         id = number;
-
     }
 }
