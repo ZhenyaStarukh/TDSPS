@@ -22,5 +22,4 @@ public class Shop {
        return Customers.contains(id);
    }
 
-
 }
