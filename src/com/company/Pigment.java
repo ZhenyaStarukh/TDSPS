@@ -9,9 +9,13 @@ public class Pigment{
     private double[] formula = new double[5];
     private double price;
     private String name;
-    //private double weight;
+    private double weight;
     private Client client;
     private ArrayList<String> effects = new ArrayList<>();
+
+
+
+
     public void printEffects(){
         System.out.println("Effects:");
         for(int i=0; i<effects.size();i++) System.out.print(effects.get(i)+", ");
@@ -59,6 +63,15 @@ public class Pigment{
             }
             formula[i]=percent;
         }
+        price = pricePerGram();
+    }
+
+    //for creating default pigments
+    public Pigment(double[] array, String name){
+       formula = array;
+       this.name = name;
+       price = pricePerGram();
+       client = new Client();
     }
 
     public Pigment(Client client){
@@ -92,7 +105,7 @@ public class Pigment{
 
     }
 
-    public double totalPrice(){
+    public double pricePerGram(){
         price = 0.0;
         for(int i = 0;i<formula.length;i++){
             price+=Color.values()[i].getPrice()*formula[i];
@@ -102,6 +115,9 @@ public class Pigment{
         }
         return price;
     }
+    public double totalPrice(){
+        return price*weight;
+    }
     public void savePigment(){
         if(!Shop.inList(client.getId())){
             System.out.println("You should be registered in order to save pigments.");
@@ -110,6 +126,7 @@ public class Pigment{
         System.out.println("Name your new pigment:");
         Scanner in = new Scanner(System.in);
         name = in.nextLine();
+        price = pricePerGram();
         Shop.addPigment(this);
     }
     public double getPrice(){return price;}
@@ -122,8 +139,8 @@ public class Pigment{
     public String getId(){
         return client.getId();
     }
-    //public void setWeight(double weight){
-    //    this.weight = weight;
-    //}
-    //public double getWeight(){return weight;}
+    public void setWeight(double weight){
+        this.weight = weight;
+    }
+    public double getWeight(){return weight;}
 }

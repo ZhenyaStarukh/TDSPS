@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Order {
     private ArrayList<Pigment> orderList = new ArrayList<>();
@@ -10,15 +11,25 @@ public class Order {
     }
     public void createPigment(){
         double weight;
-
+        Pigment pigment = new Pigment(client);
+        System.out.println("Do you want to save your pigment?\ny-yes  n-no");
+        Scanner in = new Scanner(System.in);
+        String ans = in.nextLine();
+        if(ans.equals("y")) pigment.savePigment();
+        System.out.println("Enter weight in grams.");
+        weight = Double.parseDouble(in.nextLine());
+        pigment.setWeight(weight);
+        orderList.add(pigment);
     }
     public void choosePigment(){
         double weight;
-
-        //going through pigments list, checking only basic pigments and saved one, which are created by this certain user
-        //choosing pigment from list and choosing the weight
-        //adding to orderList
-
-
+        Shop.printList();
+        System.out.println("Choose the number of pigment you want to add.");
+        Scanner in = new Scanner(System.in);
+        int number = Integer.parseInt(in.nextLine())-1;
+        //orderList.add(Shop.)
+    }
+    public void removePigment(){
+        //show the list and choose
     }
 }
