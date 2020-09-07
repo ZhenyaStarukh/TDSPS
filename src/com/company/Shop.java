@@ -15,6 +15,10 @@ public class Shop {
         else
             System.out.println("The user is not registered.");
     }
+    static void addPigment(Pigment pigment){
+        Pigments.add(pigment);
+        System.out.println("Pigment "+pigment.getName()+" is successfully added!");
+    }
     static void printList(){
         System.out.println("Customer's List");
         for(int i = 0; i< Customers.size();i++){
@@ -35,7 +39,7 @@ public class Shop {
    static void printPigments(){
        System.out.println("List of pigments");
        for(int i = 0; i< Pigments.size();i++){
-           System.out.println((i+1)+") "+Pigments.get(i).getName()+" "+Pigments.get(i).getPrice()+"UAH "/*+Pigments.get(i).getFormula()*/);
+           System.out.println((i+1)+") "+Pigments.get(i).getName()+" "+Pigments.get(i).getPrice()+"UAH "+Pigments.get(i).getFormula());
        }
    }
 

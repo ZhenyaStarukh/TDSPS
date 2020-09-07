@@ -1,11 +1,9 @@
 package com.company;
 
 public enum Color {
-    RED(50.00,10000.00,"Red"),
+    CYAN(50.00,10000.00,"Cyan"),
+    MAGENTA(70.00,10000.00,"Magenta"),
     YELLOW(60.00,10000.00,"Yellow"),
-    BLUE(70.00,10000.00,"Blue"),
-    GREEN(45.00,10000.00,"Green"),
-    PURPLE(65.00,10000.00,"Purple"),
     BLACK(40.00,10000.00,"Black"),
     WHITE(35.00,10000.00,"White");
     private final double price;

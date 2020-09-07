@@ -17,4 +17,7 @@ public class Client {
         }
         id = number;
     }
+    public void resetId(){
+        id = "None";
+    }
 }
