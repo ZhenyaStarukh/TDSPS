@@ -14,6 +14,7 @@ public class Order {
     }
     public void choosePigment(){
         double weight;
+
         //going through pigments list, checking only basic pigments and saved one, which are created by this certain user
         //choosing pigment from list and choosing the weight
         //adding to orderList

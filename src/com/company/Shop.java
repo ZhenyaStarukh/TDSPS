@@ -35,7 +35,7 @@ public class Shop {
    static void printPigments(){
        System.out.println("List of pigments");
        for(int i = 0; i< Pigments.size();i++){
-           System.out.println((i+1)+") "+Pigments.get(i).getName()+" "+Pigments.get(i).getPrice()+" "/*+Pigments.get(i).getFormula()*/);
+           System.out.println((i+1)+") "+Pigments.get(i).getName()+" "+Pigments.get(i).getPrice()+"UAH "/*+Pigments.get(i).getFormula()*/);
        }
    }
 

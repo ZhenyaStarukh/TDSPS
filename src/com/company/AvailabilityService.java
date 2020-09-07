@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class AvailabilityService {
     public static boolean enterShop(Client client){
-        //check if closed and check authentication
         if(!Shop.isOpen()){
             System.out.println("Sorry! The shop is closed!");
             return false;
@@ -22,7 +21,6 @@ public class AvailabilityService {
             }
         }
         System.out.println("Let's shop!");
-
         return true;
     }
 }
