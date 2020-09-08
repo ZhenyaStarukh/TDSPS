@@ -1,9 +1,11 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class PurchaseService {
 
 
-    public static void checkPigments(Order order){
+    private static void checkPigments(Order order){
         for (Color color: Color.values()){
             while(order.countPigment(color.ordinal())>color.getWeight()){
                 System.out.println("There is not enough pigment: "+color.getName()+
@@ -13,15 +15,23 @@ public class PurchaseService {
         }
 
     }
-    private static boolean haveDiscount(){
-        //...
+    private static boolean haveDiscount(Order order){
+        if(order.getId().equals("None")) return false;
         return true;
     }
-    private static void ShowTotal(){
 
-    }
-    // add another functions
-    public static void Purchase(){
+    public static void Purchase(Order order){
+        checkPigments(order);
+        System.out.println();
+        order.showTotal();
+        System.out.println("Do you want to make a purchase?\ny-yes  n-no");
+        Scanner in = new Scanner(System.in);
+        String ans = in.nextLine();
+        if(ans.equals("n")) return;
+        if(haveDiscount(order)) order.setDiscount();
+        order.showTotal();
+        //add to cashier
+
 
     }
 

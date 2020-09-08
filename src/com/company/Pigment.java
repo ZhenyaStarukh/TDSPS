@@ -122,7 +122,7 @@ public class Pigment implements Cloneable{
     }
     public void savePigment(){
         if(!Shop.inList(client.getId())){
-            System.out.println("You should be registered in order to save pigments.");
+            System.out.println("Sorry! You should be registered in order to save pigments.");
             return;
         }
         System.out.println("Name your new pigment:");
