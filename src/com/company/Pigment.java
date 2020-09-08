@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Pigment{
+public class Pigment implements Cloneable{
     private double[] formula = new double[5];
     private double price;
     private String name;
@@ -13,8 +13,10 @@ public class Pigment{
     private Client client;
     private ArrayList<String> effects = new ArrayList<>();
 
-
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     public void printEffects(){
         System.out.println("Effects:");
@@ -130,11 +132,17 @@ public class Pigment{
         Shop.addPigment(this);
     }
     public double getPrice(){return price;}
-    public String getName() {return name;}
+    public String getName() {
+        if (name==null) return Arrays.toString(formula);
+        return name;
+    }
     public String getFormula(){
         String str = Arrays.toString(formula);
         if(!effects.isEmpty()) str += " "+effects.toString();
         return str;
+    }
+    public double getFormula(int index){
+        return formula[index];
     }
     public String getId(){
         return client.getId();

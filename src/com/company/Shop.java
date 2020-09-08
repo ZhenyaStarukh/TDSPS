@@ -34,13 +34,25 @@ public class Shop {
             System.out.println("The user is not registered.");
     }
     static void addPigment(Pigment pigment){
-        pigments.add(pigment);
-        System.out.println("Pigment "+pigment.getName()+" is successfully added!");
+        Pigment addedPigment = null;
+        try{
+            addedPigment = (Pigment)pigment.clone();
+        }catch(CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        pigments.add(addedPigment);
+        System.out.println("Pigment "+addedPigment.getName()+" is successfully added!");
     }
 
-
-
-
+    static Pigment getPigment(int index){
+        Pigment pigment = null;
+        try{
+            pigment = (Pigment)pigments.get(index).clone();
+        } catch(CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return pigment;
+    }
 
     static void printList(){
         System.out.println("Customer's List");

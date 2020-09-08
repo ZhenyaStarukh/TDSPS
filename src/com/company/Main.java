@@ -13,9 +13,11 @@ public class Main {
         Shop.addCustomer(main.getId());
         Order order = new Order(main);
         order.createPigment();
-        Shop.printPigments(main);
-        Shop.deletePigments(main);
-        Shop.printPigments(main);
+        order.choosePigment();
+        order.createPigment();
+        order.choosePigment();
+        order.removePigment();
+        order.printOrder();
 
 
     }

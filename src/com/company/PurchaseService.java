@@ -1,8 +1,15 @@
 package com.company;
 
 public class PurchaseService {
-    private static void checkPigments(){
-        //maybe return the array of pigments that are not available
+
+
+    private static void checkPigments(Order order){
+        for (Color color: Color.values()){
+            if(order.countPigment(color.ordinal())>color.getWeight()){
+
+            }
+        }
+
     }
     private static boolean haveDiscount(){
         //...

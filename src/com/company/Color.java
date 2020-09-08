@@ -17,6 +17,7 @@ public enum Color {
     }
     public String getName(){return name;}
     public double getPrice(){return price;}
+    public double getWeight(){return weight;}
 
     public void reduceWeight(double weight){
         //...
