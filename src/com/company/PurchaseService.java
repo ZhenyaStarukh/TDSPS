@@ -3,10 +3,12 @@ package com.company;
 public class PurchaseService {
 
 
-    private static void checkPigments(Order order){
+    public static void checkPigments(Order order){
         for (Color color: Color.values()){
-            if(order.countPigment(color.ordinal())>color.getWeight()){
-
+            while(order.countPigment(color.ordinal())>color.getWeight()){
+                System.out.println("There is not enough pigment: "+color.getName()+
+                        "\nYou can remove pigment.");
+                order.removePigment();
             }
         }
 
