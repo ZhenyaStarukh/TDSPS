@@ -1,5 +1,6 @@
 package com.company;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class PurchaseService {
@@ -21,6 +22,7 @@ public class PurchaseService {
     }
 
     public static void Purchase(Order order){
+        DecimalFormat decimalFormat = new DecimalFormat("#,###0.00");
         checkPigments(order);
         System.out.println();
         order.showTotal();
@@ -30,7 +32,12 @@ public class PurchaseService {
         if(ans.equals("n")) return;
         if(haveDiscount(order)) order.setDiscount();
         order.showTotal();
-        //add to cashier
+        Cashier.addToCashier(order.getTotalPrice());
+        for(Color color: Color.values()){
+            //System.out.print(color.getName()+": "+decimalFormat.format(color.getWeight())+"  -  ");
+            color.reduceWeight(order.countPigment(color.ordinal()));
+            //System.out.println(decimalFormat.format(color.getWeight()));
+        }
 
 
     }

@@ -6,21 +6,7 @@ import java.util.Scanner;
 public class Shop {
     private static final ArrayList<String> customers = new ArrayList<>();
     private static ArrayList<Pigment> pigments = new ArrayList<>();
-    public static void openShop(){
-        Pigment cyan = new Pigment(new double[]{1.0, 0.0, 0.0, 0.0, 0.0},"Cyan");
-        Pigment magenta = new Pigment(new double[]{0.0, 1.0, 0.0, 0.0, 0.0},"Magenta");
-        Pigment yellow = new Pigment(new double[]{0.0, 0.0, 1.0, 0.0, 0.0},"Yellow");
-        Pigment black = new Pigment(new double[]{0.0, 0.0, 0.0, 1.0, 0.0},"Black");
-        Pigment white = new Pigment(new double[]{0.0, 0.0, 0.0, 0.0, 1.0},"White");
-        Pigment red = new Pigment(new double[]{0.0, 0.5, 0.5, 0.0, 0.0},"Red");
-        Pigment blue = new Pigment(new double[]{0.5, 0.5, 0.0, 0.0, 0.0},"Blue");
-        Pigment green = new Pigment(new double[]{0.5, 0.0, 0.5, 0.0, 0.0},"Green");
-        Pigment purple = new Pigment(new double[]{0.34, 0.66, 0.0, 0.0, 0.0},"Purple");
-        Pigment pink = new Pigment(new double[]{0.0,0.33,0.33,0.0,0.34},"Pink");
-        pigments.add(cyan);pigments.add(magenta);pigments.add(yellow);pigments.add(black);
-        pigments.add(white);pigments.add(red);pigments.add(blue);pigments.add(green);
-        pigments.add(purple);pigments.add(pink);
-    }
+
 
 
     private static boolean open = true;
@@ -64,13 +50,37 @@ public class Shop {
        return customers.contains(id);
    }
 
+
+   static void setPillow(double sum){
+        pillow=sum;
+   }
+
+   static double getPillow(){return pillow;}
+
    static boolean isOpen(){
         return open;
    }
    static void close(){
+        ExpensesService.addToPillow(Cashier.getCurrentBalance(),ExpensesService.buyPigments()+Cashier.getRent());
+        Cashier.resetCurrentBalance();
         open = false;
    }
-   static void open(){ open = true;}
+   static void open(){
+       Pigment cyan = new Pigment(new double[]{1.0, 0.0, 0.0, 0.0, 0.0},"Cyan");
+       Pigment magenta = new Pigment(new double[]{0.0, 1.0, 0.0, 0.0, 0.0},"Magenta");
+       Pigment yellow = new Pigment(new double[]{0.0, 0.0, 1.0, 0.0, 0.0},"Yellow");
+       Pigment black = new Pigment(new double[]{0.0, 0.0, 0.0, 1.0, 0.0},"Black");
+       Pigment white = new Pigment(new double[]{0.0, 0.0, 0.0, 0.0, 1.0},"White");
+       Pigment red = new Pigment(new double[]{0.0, 0.5, 0.5, 0.0, 0.0},"Red");
+       Pigment blue = new Pigment(new double[]{0.5, 0.5, 0.0, 0.0, 0.0},"Blue");
+       Pigment green = new Pigment(new double[]{0.5, 0.0, 0.5, 0.0, 0.0},"Green");
+       Pigment purple = new Pigment(new double[]{0.34, 0.66, 0.0, 0.0, 0.0},"Purple");
+       Pigment pink = new Pigment(new double[]{0.0,0.33,0.33,0.0,0.34},"Pink");
+       pigments.add(cyan);pigments.add(magenta);pigments.add(yellow);pigments.add(black);
+       pigments.add(white);pigments.add(red);pigments.add(blue);pigments.add(green);
+       pigments.add(purple);pigments.add(pink);
+        open = true;
+    }
    static void printPigments(Client client){
        DecimalFormat decFormat = new DecimalFormat("#,##0.00");
         System.out.println("List of pigments");

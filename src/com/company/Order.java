@@ -1,5 +1,6 @@
 package com.company;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,7 +60,7 @@ public class Order {
         for(int i=0;i<orderList.size();i++){
             count += orderList.get(i).getWeight() * orderList.get(i).getFormula(index);
         }
-        System.out.println(Color.values()[index].getName()+":  "+count);
+        //System.out.println(Color.values()[index].getName()+":  "+count);
         return count;
     }
 
@@ -71,7 +72,6 @@ public class Order {
         }
     }
     public double getTotalPrice(){
-
         return totalPrice;
     }
 
@@ -82,8 +82,9 @@ public class Order {
     }
     public void showTotal(){
         printOrder();
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
         System.out.println("___________________________________________");
         calculateTotalPrice();
-        System.out.println("Total price:\t\t\t\t\t"+totalPrice+" UAH");
+        System.out.println("Total price:\t\t\t\t\t"+decimalFormat.format(totalPrice)+" UAH");
     }
 }
