@@ -3,6 +3,7 @@ package com.company;
 import java.text.DecimalFormat;
 
 public class ExpensesService {
+
     public static double buyPigments(){
         DecimalFormat decFormat = new DecimalFormat("#,##0.00");
         double expenses=0.0;
@@ -15,9 +16,11 @@ public class ExpensesService {
         }
         return expenses;
     }
+
     public static void addToPillow(double income, double expenses){
         DecimalFormat decFormat = new DecimalFormat("#,##0.00");
-        System.out.println("Expenses: "+decFormat.format(expenses)+"\nIncome: "+decFormat.format(income)+"\nPillow: "+decFormat.format(Shop.getPillow()));
+        System.out.println("Expenses: "+decFormat.format(expenses)+"\nIncome: "+decFormat.format(income)+"\nPillow: "
+                +decFormat.format(Shop.getPillow()));
         if(expenses>income){
             Shop.setPillow(Shop.getPillow()-(expenses-income));
         }
@@ -25,6 +28,7 @@ public class ExpensesService {
             income -= expenses;
             Shop.setPillow(Shop.getPillow()+income);
         }
-        System.out.println("Expenses: "+decFormat.format(expenses)+"\nIncome: "+decFormat.format(Cashier.getCurrentBalance())+"\nPillow: "+decFormat.format(Shop.getPillow()));
+        System.out.println("Expenses: "+decFormat.format(expenses)+"\nIncome: "+decFormat.format(Cashier.getCurrentBalance())
+                +"\nPillow: "+decFormat.format(Shop.getPillow()));
     }
 }

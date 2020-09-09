@@ -15,6 +15,7 @@ public enum Color {
         this.weight=weight;
         this.name=name;
     }
+
     public String getName(){return name;}
     public double getPrice(){return price;}
     public double getWeight(){return weight;}
@@ -29,7 +30,5 @@ public enum Color {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-    //public void
-
 
 }

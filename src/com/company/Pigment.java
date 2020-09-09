@@ -13,6 +13,19 @@ public class Pigment implements Cloneable{
     private Client client;
     private ArrayList<String> effects = new ArrayList<>();
 
+    //for creating default pigments
+    public Pigment(double[] array, String name){
+        formula = array;
+        this.name = name;
+        price = pricePerGram();
+        client = new Client();
+    }
+
+    public Pigment(Client client){
+        createFormula();
+        this.client = client;
+    }
+
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -36,6 +49,7 @@ public class Pigment implements Cloneable{
             System.out.print(color.getName()+" ");
         }
         System.out.println();
+
         for (int i = 0;i<formula.length;i++){
             System.out.print(formula[i]+"    ");
         }
@@ -53,10 +67,12 @@ public class Pigment implements Cloneable{
             System.out.print(Color.values()[i].getName()+": ");
             Scanner in = new Scanner(System.in);
             double percent = Double.parseDouble(in.next());
+
             while(percent > 1 || percent < 0 || sumFormula()+percent>1){
                 System.out.println("Please enter a number from 0 to 1.\n Remember that the total percentage sum should be <=1");
                 percent = Double.parseDouble(in.next());
             }
+
             if(i==formula.length-1){
                 while(sumFormula()+percent!=1){
                     System.out.println("Sum should be equal 1.");
@@ -68,24 +84,11 @@ public class Pigment implements Cloneable{
         price = pricePerGram();
     }
 
-    //for creating default pigments
-    public Pigment(double[] array, String name){
-       formula = array;
-       this.name = name;
-       price = pricePerGram();
-       client = new Client();
-    }
-
-    public Pigment(Client client){
-        createFormula();
-        this.client = client;
-    }
-
-
     public void alterFormula(){
         printFormula();
         createFormula();
     }
+
     public void addEffect(){
         System.out.println("Choose from list below:");
         for(Effect effect: Effect.values()){
@@ -117,6 +120,7 @@ public class Pigment implements Cloneable{
         }
         return price;
     }
+
     public double totalPrice(){
         price*=weight;
         for(int i = 0;i<effects.size();i++){
@@ -124,6 +128,7 @@ public class Pigment implements Cloneable{
         }
         return price;
     }
+
     public void savePigment(){
         if(!Shop.inList(client.getId())){
             System.out.println("Sorry! You should be registered in order to save pigments.");
@@ -135,11 +140,14 @@ public class Pigment implements Cloneable{
         price = pricePerGram();
         Shop.addPigment(this);
     }
+
     public double getPrice(){return price;}
+
     public String getName() {
         if (name==null) return Arrays.toString(formula);
         return name;
     }
+
     public String getFormula(){
         String str = Arrays.toString(formula);
         if(!effects.isEmpty()) str += " "+effects.toString();
@@ -148,11 +156,14 @@ public class Pigment implements Cloneable{
     public double getFormula(int index){
         return formula[index];
     }
+
     public String getId(){
         return client.getId();
     }
+
     public void setWeight(double weight){
         this.weight = weight;
     }
+
     public double getWeight(){return weight;}
 }

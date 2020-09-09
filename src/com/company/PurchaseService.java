@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class PurchaseService {
 
-
     private static void checkPigments(Order order){
         for (Color color: Color.values()){
             while(order.countPigment(color.ordinal())>color.getWeight()){
@@ -16,6 +15,7 @@ public class PurchaseService {
         }
 
     }
+
     private static boolean haveDiscount(Order order){
         if(order.getId().equals("None")) return false;
         return true;

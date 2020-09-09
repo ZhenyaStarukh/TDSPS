@@ -11,6 +11,7 @@ public class Order {
     public Order(Client client){
         this.client = client;
     }
+
     public void createPigment(){
         double weight;
         Pigment pigment = new Pigment(client);
@@ -26,6 +27,7 @@ public class Order {
         if(ans.equals("y")) pigment.addEffect();
         orderList.add(pigment);
     }
+
     public void choosePigment(){
         double weight;
         Shop.printPigments(client);
@@ -41,6 +43,7 @@ public class Order {
         if(ans.equals("y")) pigment.addEffect();
         orderList.add(pigment);
     }
+
     public void printOrder(){
         System.out.println("\nYour order:");
         for(int i = 0;i<orderList.size();i++){
@@ -49,6 +52,7 @@ public class Order {
                     +orderList.get(i).totalPrice()+" UAH    "+ orderList.get(i).getWeight()+"g");
         }
     }
+
     public void removePigment(){
         printOrder();
         System.out.println("Choose a number of pigment you want to remove:");
@@ -86,6 +90,7 @@ public class Order {
         totalPrice -=totalPrice*0.05;
         System.out.println("We have a discount 5% for registered customers!");
     }
+
     public void showTotal(){
         printOrder();
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");

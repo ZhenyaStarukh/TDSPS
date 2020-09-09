@@ -6,11 +6,9 @@ import java.util.Scanner;
 public class Shop {
     private static final ArrayList<String> customers = new ArrayList<>();
     private static ArrayList<Pigment> pigments = new ArrayList<>();
-
-
-
     private static boolean open = true;
     private static double pillow = 20000;
+
     static void addCustomer(String id){
         if (!id.equals("None")) {
             customers.add(id);
@@ -19,6 +17,7 @@ public class Shop {
         else
             System.out.println("The user is not registered.");
     }
+
     static void addPigment(Pigment pigment){
         Pigment addedPigment = null;
         try{
@@ -46,25 +45,24 @@ public class Shop {
             System.out.println((i+1)+") "+customers.get(i));
         }
     }
+
    static boolean inList(String id){
        return customers.contains(id);
    }
-
-
    static void setPillow(double sum){
         pillow=sum;
    }
-
    static double getPillow(){return pillow;}
-
    static boolean isOpen(){
         return open;
    }
+
    static void close(){
         ExpensesService.addToPillow(Cashier.getCurrentBalance(),ExpensesService.buyPigments()+Cashier.getRent());
         Cashier.resetCurrentBalance();
         open = false;
    }
+
    static void open(){
        Pigment cyan = new Pigment(new double[]{1.0, 0.0, 0.0, 0.0, 0.0},"Cyan");
        Pigment magenta = new Pigment(new double[]{0.0, 1.0, 0.0, 0.0, 0.0},"Magenta");
@@ -107,6 +105,7 @@ public class Shop {
             if(ans.equals("y")) close();
         }
     }
+
    static void printPigments(Client client){
        DecimalFormat decFormat = new DecimalFormat("#,##0.00");
         System.out.println("List of pigments");
