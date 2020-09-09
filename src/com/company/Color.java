@@ -10,7 +10,7 @@ public enum Color {
     private double weight;
     private final String name;
 
-    private Color(double price,double weight,String name){
+    Color(double price, double weight, String name){
         this.price = price;
         this.weight=weight;
         this.name=name;

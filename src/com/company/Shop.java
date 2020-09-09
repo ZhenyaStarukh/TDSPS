@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Shop {
     private static final ArrayList<String> customers = new ArrayList<>();
-    private static ArrayList<Pigment> pigments = new ArrayList<>();
+    private static final ArrayList<Pigment> pigments = new ArrayList<>();
     private static boolean open = true;
     private static double pillow = 20000;
 
@@ -26,6 +26,7 @@ public class Shop {
             e.printStackTrace();
         }
         pigments.add(addedPigment);
+        assert addedPigment != null;
         System.out.println("Pigment "+addedPigment.getName()+" is successfully added!");
     }
 
@@ -39,7 +40,7 @@ public class Shop {
         return pigment;
     }
 
-    static void printList(){
+    static void printCustomerList(){
         System.out.println("Customer's List");
         for(int i = 0; i< customers.size();i++){
             System.out.println((i+1)+") "+customers.get(i));
@@ -49,16 +50,19 @@ public class Shop {
    static boolean inList(String id){
        return customers.contains(id);
    }
+
    static void setPillow(double sum){
         pillow=sum;
    }
+
    static double getPillow(){return pillow;}
+
    static boolean isOpen(){
         return open;
    }
 
    static void close(){
-        ExpensesService.addToPillow(Cashier.getCurrentBalance(),ExpensesService.buyPigments()+Cashier.getRent());
+        ExpensesService.addToPillow(Cashier.getCurrentBalance(),(ExpensesService.buyPigments()+Cashier.getRent()));
         Cashier.resetCurrentBalance();
         open = false;
    }
@@ -77,13 +81,17 @@ public class Shop {
        pigments.add(cyan);pigments.add(magenta);pigments.add(yellow);pigments.add(black);
        pigments.add(white);pigments.add(red);pigments.add(blue);pigments.add(green);
        pigments.add(purple);pigments.add(pink);
+
         open = true;
+
         while(open){
             Client client = new Client();
             AvailabilityService.enterShop(client);
             Order order = new Order(client);
+
             Scanner in = new Scanner(System.in);
             String ans;
+
             do{
                 System.out.println("Do you want to create your own pigment or choose from the list? Enter 'create' or 'choose'"+
                         "\nIf you're done with the order simply enter 'done'");
@@ -95,11 +103,16 @@ public class Shop {
                     case "choose":
                         order.choosePigment();
                         break;
+                    case "done":
+                        break;
                     default:
                         System.out.println("Please enter again.");
+                        break;
                 }
             }while(!ans.equals("done"));
+
             PurchaseService.Purchase(order);
+
             System.out.println("Do you want to close the shop?\ny-yes  n-no");
             ans = in.nextLine();
             if(ans.equals("y")) close();
@@ -109,6 +122,7 @@ public class Shop {
    static void printPigments(Client client){
        DecimalFormat decFormat = new DecimalFormat("#,##0.00");
         System.out.println("List of pigments");
+
         for(int i = 0; i< pigments.size();i++){
            if(pigments.get(i).getId().equals("None") || (inList(client.getId()) && pigments.get(i).getId().equals(client.getId())))
                System.out.println((i+1)+") "+pigments.get(i).getName()+"   "+decFormat.format(pigments.get(i).getPrice())
@@ -117,18 +131,16 @@ public class Shop {
         }
    }
 
-   static void deletePigments(Client client){
-       DecimalFormat decFormat = new DecimalFormat("#,##0.00");
-       System.out.println("List of your pigments");
-       for(int i = 0; i< pigments.size();i++){
-           if(inList(client.getId()) && pigments.get(i).getId().equals(client.getId()))
-               System.out.println((i+1)+") "+pigments.get(i).getName()+"   "+decFormat.format(pigments.get(i).getPrice())
-                       +" UAH   "+pigments.get(i).getFormula());
-
-       }
-       System.out.println("Enter the number of pigment you want to delete");
+   static void deletePigments(Client client){             //this function will be used if customer would want to delete
+       printPigments(client);                             //their custom pigment rom the Pigment List
        Scanner in = new Scanner(System.in);
-       int number = Integer.parseInt(in.nextLine())-1;
+       int number;
+
+       do{
+           System.out.println("Enter the number of pigment you want to delete.\nNOTE: you can only delete your custom pigments");
+           number = Integer.parseInt(in.nextLine())-1;
+       }while(number<10);
+
        System.out.println("Do you really want to delete pigment "+pigments.get(number).getName()+"?\ny-yes n-no");
        String ans = in.nextLine();
        if(ans.equals("y")) pigments.remove(number);

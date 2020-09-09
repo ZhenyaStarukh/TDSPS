@@ -13,6 +13,5 @@ public class RegisterService {
             Shop.addCustomer(client.getId());
             System.out.println("\n"+client.getId());
         }
-        Shop.printList();
     }
 }

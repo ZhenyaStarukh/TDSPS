@@ -3,10 +3,10 @@ package com.company;
 import java.util.Scanner;
 
 public class AvailabilityService {
-    public static boolean enterShop(Client client){
+    public static void enterShop(Client client){
         if(!Shop.isOpen()){
             System.out.println("Sorry! The shop is closed!");
-            return false;
+            return;
         }
         if(client.getId().equals("None")){
             System.out.println("You are unauthorized! Please enter your telephone number (e.g. +380671234567): ");
@@ -25,6 +25,5 @@ public class AvailabilityService {
             else System.out.println("Welcome back, user "+client.getId());
         }
         System.out.println("Let's shop!");
-        return true;
     }
 }
