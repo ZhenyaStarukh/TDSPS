@@ -8,13 +8,17 @@ public class AvailabilityService {
             System.out.println("Sorry! The shop is closed!");
             return;
         }
+
         if(client.getId().equals("None")){
             System.out.println("You are unauthorized! Please enter your telephone number (e.g. +380671234567): ");
+
             Scanner in = new Scanner(System.in);
             client.setId(in.nextLine());
+
             if (!Shop.inList(client.getId())){
                 System.out.println("Number not found. Would you like to register?\ny-yes n-no");
                 String ans = in.nextLine();
+
                 if (ans.equals("y")){
                         RegisterService.Register(client);
                 }

@@ -68,6 +68,7 @@ public class Shop {
    }
 
    static void open(){
+        //this part of the code is only used for showing how everything performs
        Pigment cyan = new Pigment(new double[]{1.0, 0.0, 0.0, 0.0, 0.0},"Cyan");
        Pigment magenta = new Pigment(new double[]{0.0, 1.0, 0.0, 0.0, 0.0},"Magenta");
        Pigment yellow = new Pigment(new double[]{0.0, 0.0, 1.0, 0.0, 0.0},"Yellow");
