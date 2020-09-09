@@ -5,8 +5,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("There is a pigment shop, where people can buy certain pigments for paint. They even can " +
-                "make their own pigments.\n");
+        System.out.println("There is a pigment shop, where people can buy certain pigments for paint. " +
+                "\nThe main idea of this project is to automate the process of purchasing from this shop.\n" +
+                "Clients can create their own pigments by mixing basic pigments (cyan, magenta, yellow, black and white)" +
+                " in the proportions given by them. The program will calculate the sum of those pigments, " +
+                "automatically add money, gained from clients' orders, to shop's fund and calculate shop's income\n\n\n");
         Shop shop = new Shop();
 
 
