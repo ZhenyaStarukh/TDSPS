@@ -22,9 +22,9 @@ public class PurchaseService {
     }
 
     public static void Purchase(Order order){
-        DecimalFormat decimalFormat = new DecimalFormat("#,###0.00");
+        //DecimalFormat decimalFormat = new DecimalFormat("#,###0.00");
         checkPigments(order);
-        System.out.println();
+        order.calculateTotalPrice();
         order.showTotal();
         System.out.println("Do you want to make a purchase?\ny-yes  n-no");
         Scanner in = new Scanner(System.in);

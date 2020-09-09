@@ -118,7 +118,11 @@ public class Pigment implements Cloneable{
         return price;
     }
     public double totalPrice(){
-        return price*weight;
+        price*=weight;
+        for(int i = 0;i<effects.size();i++){
+            price+=Effect.valueOf(effects.get(i).toUpperCase()).getPrice();
+        }
+        return price;
     }
     public void savePigment(){
         if(!Shop.inList(client.getId())){

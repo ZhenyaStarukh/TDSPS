@@ -1,11 +1,11 @@
 package com.company;
 
 public enum Color {
-    CYAN(50.00,1000.00,"Cyan"),
-    MAGENTA(70.00,1000.00,"Magenta"),
-    YELLOW(60.00,1000.00,"Yellow"),
-    BLACK(40.00,1000.00,"Black"),
-    WHITE(35.00,1000.00,"White");
+    CYAN(5.00,1000.00,"Cyan"),
+    MAGENTA(7.00,1000.00,"Magenta"),
+    YELLOW(6.00,1000.00,"Yellow"),
+    BLACK(4.00,1000.00,"Black"),
+    WHITE(3.50,1000.00,"White");
     private final double price;
     private double weight;
     private final String name;

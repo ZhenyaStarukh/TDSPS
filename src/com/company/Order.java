@@ -21,6 +21,9 @@ public class Order {
         System.out.println("Enter weight in grams.");
         weight = Double.parseDouble(in.nextLine());
         pigment.setWeight(weight);
+        System.out.println("Do you want to add an effect?\ny-yes n-no");
+        ans = in.nextLine();
+        if(ans.equals("y")) pigment.addEffect();
         orderList.add(pigment);
     }
     public void choosePigment(){
@@ -33,12 +36,16 @@ public class Order {
         weight = Double.parseDouble(in.nextLine());
         Pigment pigment = Shop.getPigment(number);
         pigment.setWeight(weight);
+        System.out.println("Do you want to add an effect?\ny-yes n-no");
+        String ans = in.nextLine();
+        if(ans.equals("y")) pigment.addEffect();
         orderList.add(pigment);
     }
     public void printOrder(){
         System.out.println("\nYour order:");
         for(int i = 0;i<orderList.size();i++){
-            System.out.println((i+1)+") "+orderList.get(i).getName()+"  "
+            System.out.println((i+1)+") "+orderList.get(i).getName()+"  ("+
+                    orderList.get(i).getFormula()+")  "
                     +orderList.get(i).totalPrice()+" UAH    "+ orderList.get(i).getWeight()+"g");
         }
     }
@@ -76,15 +83,13 @@ public class Order {
     }
 
     public void setDiscount(){
-        double finalPrice = getTotalPrice();
-        finalPrice -= finalPrice*0.05;
-        totalPrice = finalPrice;
+        totalPrice -=totalPrice*0.05;
+        System.out.println("We have a discount 5% for registered customers!");
     }
     public void showTotal(){
         printOrder();
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
         System.out.println("___________________________________________");
-        calculateTotalPrice();
         System.out.println("Total price:\t\t\t\t\t"+decimalFormat.format(totalPrice)+" UAH");
     }
 }

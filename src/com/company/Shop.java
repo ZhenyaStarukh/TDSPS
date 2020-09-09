@@ -10,7 +10,7 @@ public class Shop {
 
 
     private static boolean open = true;
-    private static double pillow;
+    private static double pillow = 20000;
     static void addCustomer(String id){
         if (!id.equals("None")) {
             customers.add(id);
@@ -80,6 +80,32 @@ public class Shop {
        pigments.add(white);pigments.add(red);pigments.add(blue);pigments.add(green);
        pigments.add(purple);pigments.add(pink);
         open = true;
+        while(open){
+            Client client = new Client();
+            AvailabilityService.enterShop(client);
+            Order order = new Order(client);
+            Scanner in = new Scanner(System.in);
+            String ans;
+            do{
+                System.out.println("Do you want to create your own pigment or choose from the list? Enter 'create' or 'choose'"+
+                        "\nIf you're done with the order simply enter 'done'");
+                ans = in.nextLine();
+                switch (ans){
+                    case "create":
+                        order.createPigment();
+                        break;
+                    case "choose":
+                        order.choosePigment();
+                        break;
+                    default:
+                        System.out.println("Please enter again.");
+                }
+            }while(!ans.equals("done"));
+            PurchaseService.Purchase(order);
+            System.out.println("Do you want to close the shop?\ny-yes  n-no");
+            ans = in.nextLine();
+            if(ans.equals("y")) close();
+        }
     }
    static void printPigments(Client client){
        DecimalFormat decFormat = new DecimalFormat("#,##0.00");
