@@ -17,6 +17,7 @@ public class Main {
         Client Sasha = new Client();
 
 
+
         System.out.println("In order to enter the shop's system, customers should enter their phone number. " +
                 "\nThen they'll have an opportunity to register their number, or they can enter without registration.\n");
 
@@ -51,9 +52,8 @@ public class Main {
 
         System.out.println("Every customer can choose one of shop's pigments or create their own. " +
                 "List of pigments printed below\n");
-
         shop.printPigments(Sasha);//if customer is registered, they can see not only basic pigments, but also the one they've
-                                                                                                             //saved before
+        //saved before
         ivansOrder.choosePigment(shop,1000,7);
         ivansOrder.choosePigment(shop,500,5);
         annasOrder.createPigment(new double[]{0.0,0.34,0.66,0.0,0.0},1000);
@@ -65,6 +65,7 @@ public class Main {
         System.out.println("\nCustomers, if they're authorized, can save their pigment.");
         System.out.println("Anna decided to save her custom pigment.\n");
         annasOrder.savePigment(1,shop,"Orange");
+
 
 
         System.out.println("We can check whether this pigment is saved. Let's check the list");
@@ -82,14 +83,15 @@ public class Main {
                 " custom pigment from shop's list (not from order!!!)");
         shop.deletePigments(Anna,11);
         System.out.println();
-
         //Checking whether this pigment was deleted
         shop.printPigments(Anna);
+
 
 
         System.out.println("\n\nCustomer can alter the formula of pigments, they've entered." +
                 "\nFor example, Sasha decided to alter his first pigment in his order.");
         sashasOrder.alterPigmentFromOrder(1,new double[]{0.1,0.3,0.5,0.0,0.1});
+
 
 
         System.out.println("\nCustomer also can add effect to their pigments\nFirstly let's see what effects we can add.\n");
@@ -104,6 +106,7 @@ public class Main {
         ivansOrder.removePigment(2);
 
 
+
         System.out.println("\nNow we can print out all orders.\n");
         System.out.println("Anna");
         annasOrder.printOrder();
@@ -113,6 +116,7 @@ public class Main {
         sashasOrder.printOrder();
 
 
+
         System.out.println("\n\nEvery customer can purchase their pigments. (or not)\n");
         System.out.println("Anna");
         shop.makePurchase(annasOrder,"yes");
@@ -120,6 +124,7 @@ public class Main {
         shop.makePurchase(ivansOrder,"no");
         System.out.println("------------\nSasha");
         shop.makePurchase(sashasOrder,"yes");
+
 
 
         System.out.println("\nAfter that we can calculate expenses and income.");
