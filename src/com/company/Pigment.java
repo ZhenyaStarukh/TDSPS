@@ -29,6 +29,7 @@ public class Pigment implements Cloneable{
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
     public String getName() {
         if (name==null) return Arrays.toString(formula);
         return name;
