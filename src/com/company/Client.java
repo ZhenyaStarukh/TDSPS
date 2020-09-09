@@ -1,11 +1,13 @@
 package com.company;
 import java.util.Scanner;
 
-public class Client {
+public final class Client {
     private String id;
+
     public Client(){
         id = "None";
     }
+
     public String getId(){
         return id;
     }

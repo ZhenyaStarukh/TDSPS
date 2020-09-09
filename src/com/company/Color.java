@@ -11,10 +11,10 @@ public enum Color {
     private double weight;
     private final String name;
 
-    Color(double price, double weight, String name){
+    Color(double price, double weight, String name) {
         this.price = price;
-        this.weight=weight;
-        this.name=name;
+        this.weight = weight;
+        this.name = name;
     }
 
     public String getName(){return name;}
@@ -24,9 +24,7 @@ public enum Color {
     public double getWeight(){return weight;}
 
     public void reduceWeight(double weight){
-        if (weight>this.weight)
-            System.out.println("There is not enough pigment.");
-        else
+        if (weight <= this.weight)
             this.weight -= weight;
     }
 

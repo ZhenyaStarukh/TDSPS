@@ -8,8 +8,7 @@ public class PurchaseService {
     private void checkPigments(Order order){
 
         for (Color color: Color.values()){
-
-            while(order.countPigment(color.ordinal())>color.getWeight()){
+            while(order.countPigment(color.ordinal()) > color.getWeight()){
                 System.out.println("There is not enough pigment: "+color.getName()+
                         "\nYou can remove pigment.");
                 Scanner in = new Scanner(System.in);

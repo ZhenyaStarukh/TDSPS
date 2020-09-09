@@ -10,8 +10,8 @@ public enum Effect {
     private final double price;
 
     Effect(String name, double price){
-        this.name=name;
-        this.price=price;
+        this.name = name;
+        this.price = price;
     }
 
     public String getName() {

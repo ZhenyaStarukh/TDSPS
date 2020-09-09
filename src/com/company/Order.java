@@ -19,9 +19,9 @@ public class Order {
         orderList.add(pigment);
     }
 
-    public void choosePigment(Shop shop, double weight, int number){
+    public void choosePigment(Shop shop, double weight, int index){
 
-        Pigment pigment = shop.getPigment(number-1);
+        Pigment pigment = shop.getPigment(index-1);
         pigment.setWeight(weight);
 
         orderList.add(pigment);
@@ -39,27 +39,29 @@ public class Order {
         orderList.get(index-1).savePigment(shop,name);
     }
 
-    public void printOrder(){
-        System.out.println("\nYour order:");
+    @Override
+    public String toString() {
+        String order = "Order:\n";
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        for(int i = 0;i < orderList.size();i++){
+            order += Integer.toString(i+1)
+                    +") "
+                    +orderList.get(i).getName()+"  ";
 
-        for(int i = 0;i<orderList.size();i++){
-            System.out.print((i+1)+") "+orderList.get(i).getName()+"  ");
+            if(orderList.get(i).haveEffects())
+                order += "("+orderList.get(i).getEffects()+")  ";
 
-            if(orderList.get(i).haveEffects()) System.out.print("("+orderList.get(i).getEffects()+")  ");
-
-            System.out.println(decimalFormat.format(orderList.get(i).totalPrice())+" UAH    "
-                    + decimalFormat.format(orderList.get(i).getWeight())+"g");
+            order += decimalFormat.format(orderList.get(i).totalPrice())+" UAH    "
+                    + decimalFormat.format(orderList.get(i).getWeight())+"g\n";
         }
+
+        return order;
+
     }
 
     public void removePigment(int index){
-
-        int number = index-1;
-
-            orderList.remove(number);
-            System.out.println("Pigment is removed.");
-
+            orderList.remove(index-1);
+            System.out.println("Pigment is removed.");  //only for showing in the main
     }
 
     public double countPigment(int index){
@@ -68,7 +70,6 @@ public class Order {
         for (Pigment pigment : orderList) {
             count += pigment.getWeight() * pigment.getFormula(index);
         }
-        //System.out.println(Color.values()[index].getName()+":  "+count);
         return count;
     }
 
@@ -86,12 +87,12 @@ public class Order {
     }
 
     public void setDiscount(){
-        totalPrice -=totalPrice*0.05;
-        System.out.println("We have a discount 5% for registered customers!");
+        totalPrice -= totalPrice*0.05;
+        System.out.println("We have a discount 5% for registered customers!"); //only or showing in main
     }
 
     public void showTotal(){
-        printOrder();
+        System.out.println(this.toString());
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
         System.out.println("___________________________________________");
         System.out.println("Total price:\t\t\t\t\t"+decimalFormat.format(totalPrice)+" UAH");

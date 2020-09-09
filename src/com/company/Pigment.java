@@ -31,7 +31,7 @@ public class Pigment implements Cloneable{
     }
 
     public String getName() {
-        if (name==null) return Arrays.toString(formula);
+        if (name == null) return Arrays.toString(formula);
         return name;
     }
 
@@ -47,6 +47,7 @@ public class Pigment implements Cloneable{
 
     public void savePigment(Shop shop, String name){
         if(!shop.inList(client.getId())){
+            //for showing in main
             System.out.println("Sorry! You should be registered in order to save pigments.");
             return;
         }
@@ -66,8 +67,11 @@ public class Pigment implements Cloneable{
     }
 
     public void addEffect(int index){
-            effects.add(Effect.values()[index-1].getName());
-            System.out.println(Effect.values()[index-1].getName()+" added.");
+            effects.
+                    add(Effect.values()[index-1]
+                            .getName());
+            System.out.println(Effect.values()[index-1]
+                    .getName()+" added."); //only or showing in main
     }
 
     //Formula---------------------------------------------------------------------------------------------------------
@@ -94,27 +98,27 @@ public class Pigment implements Cloneable{
     private void createFormula(double[] array){
         Arrays.fill(formula, 0.0);
 
-
-        for(int i = 0;i<formula.length;i++){
-
+        for(int i = 0;i < formula.length;i++){
             Scanner in = new Scanner(System.in);
             double percent = array[i];
 
             //this is used for checking whether the array is right
-            while(percent > 1 || percent < 0 || sumFormula()+percent>1){
+            //because array "formula" is an array of percentage of each basic color/pigment
+            //so the sum of its element's should be 1 (for 100%)
+            while(percent > 1 || percent < 0 || sumFormula() + percent > 1){
                 System.out.println("Please enter a number from 0 to 1.\n " +
                         "Remember that the total percentage sum should be <=1");
                 percent = Double.parseDouble(in.next());
             }
 
             if(i==formula.length-1){
-                while(sumFormula()+percent!=1){
+                while(sumFormula() + percent != 1){
                     System.out.println("Sum should be equal 1.");
                     percent = Double.parseDouble(in.next());
                 }
             }
 
-            formula[i]=percent;
+            formula[i] = percent;
         }
 
         pricePerGram();
@@ -139,19 +143,20 @@ public class Pigment implements Cloneable{
     public void pricePerGram(){
         price = 0.0;
 
-        for(int i = 0;i<formula.length;i++){
-            price+=Color.values()[i].getPrice()*formula[i];
+        for(int i = 0;i < formula.length;i++){
+            price += Color.values()[i].getPrice()  * formula[i];
         }
 
         for (String effect : effects) {
-            price += Effect.valueOf(effect.toUpperCase()).getPrice();
+            price += Effect.valueOf(effect.toUpperCase())
+                    .getPrice();
         }
     }
 
     public double totalPrice(){
         pricePerGram();
-        return price*weight;
+        return price * weight;
     }
 
-    public double getPrice(){return price;}
+    public double getPrice() {return price;}
 }

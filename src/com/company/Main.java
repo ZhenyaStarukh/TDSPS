@@ -77,6 +77,10 @@ public class Main {
                 " only she can see pigments, created by her.\n");
         //you'll see that only Anna has additional pigment, 'cause she's the person, who created it.
 
+        System.out.println("\nLet's try to save Sasha's pigment.");
+        sashasOrder.savePigment(1,shop,"New color");
+        System.out.println("\nAs we can see, unregistered customers can't save their pigments.");
+
 
 
         System.out.println("\nCustomer can delete their custom pigment.\nAnna decided that she'll delete her" +
@@ -108,21 +112,19 @@ public class Main {
 
 
         System.out.println("\nNow we can print out all orders.\n");
-        System.out.println("Anna");
-        annasOrder.printOrder();
-        System.out.println("------------\nIvan");
-        ivansOrder.printOrder();
-        System.out.println("------------\nSasha");
-        sashasOrder.printOrder();
+        System.out.println("Anna's \n"+annasOrder.toString());
+        System.out.println("\n------------\nIvan's "+ivansOrder.toString());
+        System.out.println("\n------------\nSasha's "+sashasOrder.toString());
+
 
 
 
         System.out.println("\n\nEvery customer can purchase their pigments. (or not)\n");
-        System.out.println("Anna");
+        System.out.println("Anna's ");
         shop.makePurchase(annasOrder,"yes");
-        System.out.println("------------\nIvan");
+        System.out.println("\n------------\nIvan's ");
         shop.makePurchase(ivansOrder,"no");
-        System.out.println("------------\nSasha");
+        System.out.println("\n------------\nSasha's ");
         shop.makePurchase(sashasOrder,"yes");
 
 

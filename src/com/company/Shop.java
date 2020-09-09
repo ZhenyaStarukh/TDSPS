@@ -110,17 +110,17 @@ public class Shop {
    void deletePigments(Client client, int index){
        printPigments(client);
        Scanner in = new Scanner(System.in);
-       int number=index-1;
+       index = index-1;
 
-       while(number<10){
+       while(index<10){
            System.out.println("Enter the number of pigment you want to delete.\nNOTE: you can only delete your custom pigments");
-           number = Integer.parseInt(in.nextLine())-1;
+           index = Integer.parseInt(in.nextLine())-1;
        }
-       pigments.remove(number);
+       pigments.remove(index);
    }
 
-   void registerUser(Client client,String ans){
-        registerService.Register(client,this,ans);
+   void registerUser(Client client,String answer){
+        registerService.Register(client,this,answer);
    }
 
 }
