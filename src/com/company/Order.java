@@ -44,7 +44,7 @@ public class Order {
         String order = "Order:\n";
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
         for(int i = 0;i < orderList.size();i++){
-            order += Integer.toString(i+1)
+            order += (i + 1)
                     +") "
                     +orderList.get(i).getName()+"  ";
 
