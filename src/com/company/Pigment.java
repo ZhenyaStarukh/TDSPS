@@ -20,8 +20,8 @@ public class Pigment implements Cloneable{
         client = new Client();
     }
 
-    public Pigment(Client client){
-        createFormula();
+    public Pigment(Client client,double[] array){
+        createFormula(array);
         this.client = client;
     }
 
@@ -45,19 +45,15 @@ public class Pigment implements Cloneable{
 
     public double getWeight(){return weight;}
 
-    public void savePigment(){
-        if(!Shop.inList(client.getId())){
+    public void savePigment(Shop shop, String name){
+        if(!shop.inList(client.getId())){
             System.out.println("Sorry! You should be registered in order to save pigments.");
             return;
         }
 
-        System.out.println("Name your new pigment:");
-        Scanner in = new Scanner(System.in);
-        name = in.nextLine();
-
+        this.name = name;
         pricePerGram();
-
-        Shop.addPigment(this);
+        shop.addPigment(this);
     }
 
     //Effects--------------------------------------------------------------------------------------------------------
@@ -69,27 +65,9 @@ public class Pigment implements Cloneable{
         return !effects.isEmpty();
     }
 
-    public void addEffect(){
-        System.out.println("Choose from list below:");
-        for(Effect effect: Effect.values()){
-            System.out.println((effect.ordinal()+1)+") "+effect.getName()+": "+ effect.getPrice()+" UAH");
-        }
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter number from 1 to 4:");
-        int number = Integer.parseInt(in.nextLine());
-
-        System.out.println("Are you sure you want to add "+Effect.values()[number-1].getName()+" to your pigment?" +
-                "\ny-yes  n-no");
-        String ans = in.nextLine();
-        if(ans.equals("y")) {
-            effects.add(Effect.values()[number-1].getName());
-            System.out.println(Effect.values()[number-1].getName()+" added.");
-        }
-        else if (ans.equals("n"))
-            System.out.println("No effect added.");
-
-
+    public void addEffect(int index){
+            effects.add(Effect.values()[index-1].getName());
+            System.out.println(Effect.values()[index-1].getName()+" added.");
     }
 
     //Formula---------------------------------------------------------------------------------------------------------
@@ -113,19 +91,16 @@ public class Pigment implements Cloneable{
         System.out.println();
     }
 
-    private void createFormula(){
+    private void createFormula(double[] array){
         Arrays.fill(formula, 0.0);
-        System.out.println("For each color enter from 0(for 0%) to 1(for 100%) " +
-                "to declare the percentage.\nBe aware that" +
-                " the sum of all color percentage should be equal to 1 " +
-                "(e.g. you can't have 100% of red and yellow" +
-                " at the same time)");
+
 
         for(int i = 0;i<formula.length;i++){
-            System.out.print(Color.values()[i].getName()+": ");
-            Scanner in = new Scanner(System.in);
-            double percent = Double.parseDouble(in.next());
 
+            Scanner in = new Scanner(System.in);
+            double percent = array[i];
+
+            //this is used for checking whether the array is right
             while(percent > 1 || percent < 0 || sumFormula()+percent>1){
                 System.out.println("Please enter a number from 0 to 1.\n " +
                         "Remember that the total percentage sum should be <=1");
@@ -145,9 +120,9 @@ public class Pigment implements Cloneable{
         pricePerGram();
     }
 
-    public void alterFormula(){
+    public void alterFormula(double[] array){
         printFormula();
-        createFormula();
+        createFormula(array);
     }
 
     public String getFormula(){

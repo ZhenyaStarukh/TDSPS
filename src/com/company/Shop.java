@@ -4,12 +4,41 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Shop {
-    private static final ArrayList<String> customers = new ArrayList<>();
-    private static final ArrayList<Pigment> pigments = new ArrayList<>();
-    private static boolean open = true;
-    private static double pillow = 20000;
+    private  final ArrayList<String> customers = new ArrayList<>();
+    private  final ArrayList<Pigment> pigments = new ArrayList<>();
+    private  double pillow = 20000;
+    private final ExpensesService expensesService;
+    private final Cashier cashier;
+    private final PurchaseService purchaseService;
+    private final RegisterService registerService;
 
-    static void addCustomer(String id){
+
+    public Shop(){
+        //this part of the code is only used at this stage, because there is no db
+        Pigment cyan = new Pigment(new double[]{1.0, 0.0, 0.0, 0.0, 0.0},"Cyan");
+        Pigment magenta = new Pigment(new double[]{0.0, 1.0, 0.0, 0.0, 0.0},"Magenta");
+        Pigment yellow = new Pigment(new double[]{0.0, 0.0, 1.0, 0.0, 0.0},"Yellow");
+        Pigment black = new Pigment(new double[]{0.0, 0.0, 0.0, 1.0, 0.0},"Black");
+        Pigment white = new Pigment(new double[]{0.0, 0.0, 0.0, 0.0, 1.0},"White");
+        Pigment red = new Pigment(new double[]{0.0, 0.5, 0.5, 0.0, 0.0},"Red");
+        Pigment blue = new Pigment(new double[]{0.5, 0.5, 0.0, 0.0, 0.0},"Blue");
+        Pigment green = new Pigment(new double[]{0.5, 0.0, 0.5, 0.0, 0.0},"Green");
+        Pigment purple = new Pigment(new double[]{0.34, 0.66, 0.0, 0.0, 0.0},"Purple");
+        Pigment pink = new Pigment(new double[]{0.0,0.33,0.33,0.0,0.34},"Pink");
+        pigments.add(cyan);pigments.add(magenta);pigments.add(yellow);pigments.add(black);
+        pigments.add(white);pigments.add(red);pigments.add(blue);pigments.add(green);
+        pigments.add(purple);pigments.add(pink);
+
+        //this is only for showing the example
+        customers.add("+380959873450");
+
+        expensesService = new ExpensesService();
+        cashier = new Cashier();
+        purchaseService = new PurchaseService();
+        registerService = new RegisterService();
+    }
+
+    void addCustomer(String id){
         if (!id.equals("None")) {
             customers.add(id);
             System.out.println("Account "+id+" is successfully added! Welcome!");
@@ -18,7 +47,7 @@ public class Shop {
             System.out.println("The user is not registered.");
     }
 
-    static void addPigment(Pigment pigment){
+    void addPigment(Pigment pigment){
         Pigment addedPigment = null;
         try{
             addedPigment = (Pigment)pigment.clone();
@@ -30,7 +59,7 @@ public class Shop {
         System.out.println("Pigment "+addedPigment.getName()+" is successfully added!");
     }
 
-    static Pigment getPigment(int index){
+    Pigment getPigment(int index){
         Pigment pigment = null;
         try{
             pigment = (Pigment)pigments.get(index).clone();
@@ -40,87 +69,33 @@ public class Shop {
         return pigment;
     }
 
-    static void printCustomerList(){
+    void printCustomerList(){
         System.out.println("Customer's List");
         for(int i = 0; i< customers.size();i++){
             System.out.println((i+1)+") "+customers.get(i));
         }
     }
 
-   static boolean inList(String id){
+   boolean inList(String id){
        return customers.contains(id);
    }
 
-   static void setPillow(double sum){
+   void setPillow(double sum){
         pillow=sum;
    }
 
-   static double getPillow(){return pillow;}
+   double getPillow(){return pillow;}
 
-   static boolean isOpen(){
-        return open;
+   void calculateIncome(){
+        expensesService.addToPillow(cashier.getCurrentBalance(),expensesService.buyPigments(),this);
+        cashier.resetCurrentBalance();
    }
 
-   static void close(){
-        ExpensesService.addToPillow(Cashier.getCurrentBalance(),(ExpensesService.buyPigments()+Cashier.getRent()));
-        Cashier.resetCurrentBalance();
-        open = false;
-   }
-
-   static void open(){
-        //this part of the code is only used for showing how everything performs
-       Pigment cyan = new Pigment(new double[]{1.0, 0.0, 0.0, 0.0, 0.0},"Cyan");
-       Pigment magenta = new Pigment(new double[]{0.0, 1.0, 0.0, 0.0, 0.0},"Magenta");
-       Pigment yellow = new Pigment(new double[]{0.0, 0.0, 1.0, 0.0, 0.0},"Yellow");
-       Pigment black = new Pigment(new double[]{0.0, 0.0, 0.0, 1.0, 0.0},"Black");
-       Pigment white = new Pigment(new double[]{0.0, 0.0, 0.0, 0.0, 1.0},"White");
-       Pigment red = new Pigment(new double[]{0.0, 0.5, 0.5, 0.0, 0.0},"Red");
-       Pigment blue = new Pigment(new double[]{0.5, 0.5, 0.0, 0.0, 0.0},"Blue");
-       Pigment green = new Pigment(new double[]{0.5, 0.0, 0.5, 0.0, 0.0},"Green");
-       Pigment purple = new Pigment(new double[]{0.34, 0.66, 0.0, 0.0, 0.0},"Purple");
-       Pigment pink = new Pigment(new double[]{0.0,0.33,0.33,0.0,0.34},"Pink");
-       pigments.add(cyan);pigments.add(magenta);pigments.add(yellow);pigments.add(black);
-       pigments.add(white);pigments.add(red);pigments.add(blue);pigments.add(green);
-       pigments.add(purple);pigments.add(pink);
-
-        open = true;
-
-        while(open){
-            Client client = new Client();
-            AvailabilityService.enterShop(client);
-            Order order = new Order(client);
-
-            Scanner in = new Scanner(System.in);
-            String ans;
-
-            do{
-                System.out.println("Do you want to create your own pigment or choose from the list? Enter 'create' or 'choose'"+
-                        "\nIf you're done with the order simply enter 'done'");
-                ans = in.nextLine();
-                switch (ans){
-                    case "create":
-                        order.createPigment();
-                        break;
-                    case "choose":
-                        order.choosePigment();
-                        break;
-                    case "done":
-                        break;
-                    default:
-                        System.out.println("Please enter again.");
-                        break;
-                }
-            }while(!ans.equals("done"));
-
-            PurchaseService.Purchase(order);
-
-            System.out.println("Do you want to close the shop?\ny-yes  n-no");
-            ans = in.nextLine();
-            if(ans.equals("y")) close();
-        }
+    public void makePurchase(Order order,String ans){
+        purchaseService.Purchase(order,ans,cashier);
     }
 
-   static void printPigments(Client client){
+    void printPigments(Client client){
        DecimalFormat decFormat = new DecimalFormat("#,##0.00");
         System.out.println("List of pigments");
 
@@ -132,19 +107,20 @@ public class Shop {
         }
    }
 
-   static void deletePigments(Client client){             //this function will be used if customer would want to delete
-       printPigments(client);                             //their custom pigment rom the Pigment List
+   void deletePigments(Client client, int index){
+       printPigments(client);
        Scanner in = new Scanner(System.in);
-       int number;
+       int number=index-1;
 
-       do{
+       while(number<10){
            System.out.println("Enter the number of pigment you want to delete.\nNOTE: you can only delete your custom pigments");
            number = Integer.parseInt(in.nextLine())-1;
-       }while(number<10);
+       }
+       pigments.remove(number);
+   }
 
-       System.out.println("Do you really want to delete pigment "+pigments.get(number).getName()+"?\ny-yes n-no");
-       String ans = in.nextLine();
-       if(ans.equals("y")) pigments.remove(number);
+   void registerUser(Client client,String ans){
+        registerService.Register(client,this,ans);
    }
 
 }

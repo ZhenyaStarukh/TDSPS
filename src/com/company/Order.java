@@ -2,7 +2,7 @@ package com.company;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Order {
     private final ArrayList<Pigment> orderList = new ArrayList<>();
@@ -12,50 +12,31 @@ public class Order {
         this.client = client;
     }
 
-    public void createPigment(){
-        double weight;
-        Pigment pigment = new Pigment(client);
+    public void createPigment(double[] array, double weight){
+        Pigment pigment = new Pigment(client,array);
 
-        Scanner in = new Scanner(System.in);
-        String ans;
-
-        System.out.println("Do you want to alter the formula?\ny-yes  n-no");
-        ans = in.nextLine();
-        if(ans.equals("y")) pigment.alterFormula();
-
-        System.out.println("Do you want to save your pigment?\ny-yes  n-no");
-        ans = in.nextLine();
-        if(ans.equals("y")) pigment.savePigment();
-
-        System.out.println("Enter weight in grams.");
-        weight = Double.parseDouble(in.nextLine());
         pigment.setWeight(weight);
+        orderList.add(pigment);
+    }
 
-        System.out.println("Do you want to add an effect?\ny-yes n-no");
-        ans = in.nextLine();
-        if(ans.equals("y")) pigment.addEffect();
+    public void choosePigment(Shop shop, double weight, int number){
+
+        Pigment pigment = shop.getPigment(number-1);
+        pigment.setWeight(weight);
 
         orderList.add(pigment);
     }
 
-    public void choosePigment(){
-        double weight;
-        Shop.printPigments(client);
-        System.out.println("Choose the number of pigment you want to add.");
+    public void alterPigmentFromOrder(int index, double[] array){
+        orderList.get(index-1).alterFormula(array);
+    }
 
-        Scanner in = new Scanner(System.in);
-        int number = Integer.parseInt(in.nextLine())-1;
+    public void addEffectForPigment(int index, int effect){
+        orderList.get(index-1).addEffect(effect);
+    }
 
-        System.out.println("Enter weight in grams.");
-        weight = Double.parseDouble(in.nextLine());
-        Pigment pigment = Shop.getPigment(number);
-        pigment.setWeight(weight);
-
-        System.out.println("Do you want to add an effect?\ny-yes n-no");
-        String ans = in.nextLine();
-        if(ans.equals("y")) pigment.addEffect();
-
-        orderList.add(pigment);
+    public void savePigment(int index, Shop shop, String name){
+        orderList.get(index-1).savePigment(shop,name);
     }
 
     public void printOrder(){
@@ -72,18 +53,13 @@ public class Order {
         }
     }
 
-    public void removePigment(){
-        printOrder();
-        System.out.println("Choose a number of pigment you want to remove:");
-        Scanner in = new Scanner(System.in);
-        int number = Integer.parseInt(in.nextLine())-1;
+    public void removePigment(int index){
 
-        System.out.println("Do you really want to remove pigment "+ orderList.get(number).getName()+" from your order list?\ny-yes n-no");
-        String ans = in.nextLine();
-        if(ans.equals("y")) {
+        int number = index-1;
+
             orderList.remove(number);
             System.out.println("Pigment is removed.");
-        }
+
     }
 
     public double countPigment(int index){

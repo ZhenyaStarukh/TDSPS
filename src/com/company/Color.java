@@ -6,6 +6,7 @@ public enum Color {
     YELLOW(6.00,1000.00,"Yellow"),
     BLACK(4.00,1000.00,"Black"),
     WHITE(3.50,1000.00,"White");
+
     private final double price;
     private double weight;
     private final String name;

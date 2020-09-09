@@ -5,6 +5,7 @@ public enum Effect {
     NACRE("Nacre", 3.50),
     MATTE("Matte", 1.50),
     SHIMMER("Shimmer", 1.50);
+
     private final String name;
     private final double price;
 
