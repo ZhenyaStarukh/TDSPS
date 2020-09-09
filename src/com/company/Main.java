@@ -9,7 +9,7 @@ public class Main {
                 "\nThe main idea of this project is to automate the process of purchasing from this shop.\n" +
                 "Clients can create their own pigments by mixing basic pigments (cyan, magenta, yellow, black and white)" +
                 " in the proportions given by them. The program will calculate the sum of those pigments, " +
-                "automatically add money, gained from clients' orders, to shop's fund and calculate shop's income\n\n\n");
+                "automatically add money, gained from clients' orders, to shop's fund and calculate shop's income.\n\n\n");
         Shop shop = new Shop();
 
 
